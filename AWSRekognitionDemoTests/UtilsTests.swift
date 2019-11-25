@@ -23,7 +23,7 @@ class UtilsTests: XCTestCase {
     func testThumbnail() {
         let thumbnail = testImage1?.thumbnailImage()
         XCTAssertNotNil(thumbnail)
-        XCTAssertEqual(thumbnail?.size.width, 480)
+        XCTAssertEqual(thumbnail?.size.width, 692)
         XCTAssertEqual(thumbnail?.size.height, 720)
     }
 }
