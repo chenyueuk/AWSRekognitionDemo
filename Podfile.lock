@@ -1,0 +1,50 @@
+PODS:
+  - AWSCore (2.12.2)
+  - AWSRekognition (2.12.2):
+    - AWSCore (= 2.12.2)
+  - Realm (3.21.0):
+    - Realm/Headers (= 3.21.0)
+  - Realm/Headers (3.21.0)
+  - RealmSwift (3.21.0):
+    - Realm (= 3.21.0)
+  - RxCocoa (5.0.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRealm (1.0.0):
+    - RealmSwift (~> 3.14)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.0.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.1)
+
+DEPENDENCIES:
+  - AWSCore
+  - AWSRekognition
+  - RxCocoa
+  - RxRealm
+  - RxSwift
+
+SPEC REPOS:
+  trunk:
+    - AWSCore
+    - AWSRekognition
+    - Realm
+    - RealmSwift
+    - RxCocoa
+    - RxRealm
+    - RxRelay
+    - RxSwift
+
+SPEC CHECKSUMS:
+  AWSCore: bdc0933bcb1aca4a9af3352a9e6ec75b339faf71
+  AWSRekognition: 49a69889c13fbffffb68f37b97f2247c4e0cd44a
+  Realm: 38e9dcb19104b58407167d99f70d4995f7c16023
+  RealmSwift: 3183cc1ad48378fbcd634311b22c0e6c44021152
+  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
+  RxRealm: 1e81dcfca1fb50c3e9b3e1f8102bc875c5156a2e
+  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+
+PODFILE CHECKSUM: 0e9ba786a12e3625118d8946ab560c190093aa7e
+
+COCOAPODS: 1.8.4
