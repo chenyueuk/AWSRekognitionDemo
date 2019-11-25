@@ -15,6 +15,7 @@ import RxCocoa
 class PhotoTableViewModel {
     var photoData: Results<RekognitionCellData>
     var sourcePhoto: BehaviorRelay<SourcePhotoData> = BehaviorRelay(value: Realm.sourcePhotoData())
+    var awsRekognitionProcessCount = 0
     
     /**
     * Init view model, set photoData to Realm query collection
@@ -30,7 +31,7 @@ class PhotoTableViewModel {
     */
     func compareFaces() {
         for data in photoData {
-            
+            awsRekognitionProcessCount += 1
             guard let sourceImage = Realm.sourcePhotoData().retrieveImage(),
                 let targetImage = data.baseImage?.retrieveImage() else {
                 return
@@ -38,11 +39,16 @@ class PhotoTableViewModel {
             
             let awsUtil = AWSRekognitionUtils(sourceImage: sourceImage,
                                               targetImage: targetImage)
-            awsUtil.compareFaces(onCompletion: { rects in
+            awsUtil.compareFaces(onCompletion: { (matchingRects, unmatchingRects)  in
+                self.awsRekognitionProcessCount -= 1
                 DispatchQueue.main.async {
+                    var resultImage = targetImage
+                    resultImage = resultImage.drawRects(rects: matchingRects, color: .yellow)
+                    resultImage = resultImage.drawRects(rects: unmatchingRects, color: .red)
+                    
                     try? Realm.defaultRealmInstance().write {
                         let newImage = RekognitionImage()
-                        newImage.setImage(image: targetImage.drawRects(rects: rects))
+                        newImage.setImage(image: resultImage)
                         data.resultImage = newImage
                     }
                 }

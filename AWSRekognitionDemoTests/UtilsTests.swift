@@ -14,7 +14,7 @@ class UtilsTests: XCTestCase {
     let testImage1 = UIImage(named: "TestImage1")
 
     func testImageRectDraw() {
-        let imageWithRect = testImage1?.drawBoundingRect(rect: CGRect(x: 10, y: 10, width: 10, height: 10))
+        let imageWithRect = testImage1?.drawBoundingRect(rect: CGRect(x: 10, y: 10, width: 10, height: 10), color: .black)
         XCTAssertNotNil(testImage1)
         XCTAssertNotNil(imageWithRect)
         XCTAssertNotEqual(testImage1, imageWithRect)
@@ -23,7 +23,7 @@ class UtilsTests: XCTestCase {
     func testThumbnail() {
         let thumbnail = testImage1?.thumbnailImage()
         XCTAssertNotNil(thumbnail)
-        XCTAssertEqual(thumbnail?.size.width, 692)
-        XCTAssertEqual(thumbnail?.size.height, 720)
+        XCTAssertLessThanOrEqual(thumbnail?.size.width ?? 481, 480)
+        XCTAssertLessThanOrEqual(thumbnail?.size.height ?? 721, 720)
     }
 }

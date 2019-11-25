@@ -81,7 +81,11 @@ class PhotoTableViewController: UIViewController, UITableViewDelegate {
     }
     
     fileprivate func bindResetButton() {
-        resetButton.rx.tap.bind {
+        resetButton.rx.tap.bind { [unowned self] in
+            guard self.viewModel.awsRekognitionProcessCount == 0 else {
+                self.present(self.inProgressAlertView(), animated: true, completion: nil)
+                return
+            }
             Realm.resetAllObjects()
             Realm.createSampleData()
         }.disposed(by: disposeBag)
@@ -91,5 +95,12 @@ class PhotoTableViewController: UIViewController, UITableViewDelegate {
         compareButton.rx.tap.bind { [unowned self] in
             self.viewModel.compareFaces()
         }.disposed(by: disposeBag)
+    }
+    
+    fileprivate func inProgressAlertView() -> UIAlertController {
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        let alert = UIAlertController(title: "Warning", message: "Rekognitioin in process, please wait for it to be completed for this action.", preferredStyle: .alert)
+        alert.addAction(dismissAction)
+        return alert
     }
 }

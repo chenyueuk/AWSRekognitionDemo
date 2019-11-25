@@ -15,13 +15,13 @@ extension UIImage {
     *
     * @param rect the bounding frame for the rect to be drawn.
     */
-    func drawBoundingRect(rect: CGRect) -> UIImage {
+    func drawBoundingRect(rect: CGRect, color: UIColor) -> UIImage {
         let imageSize = self.size
         let scale: CGFloat = 0
         UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
         self.draw(at: CGPoint.zero)
         
-        UIColor.yellow.set()
+        color.set()
         let path = UIBezierPath(rect: rect)
         path.lineWidth = (self.size.height * 0.02)
         path.lineCapStyle = .round
@@ -33,10 +33,10 @@ extension UIImage {
         return newImage ?? self
     }
     
-    func drawRects(rects: [CGRect]) -> UIImage {
+    func drawRects(rects: [CGRect], color: UIColor) -> UIImage {
         var result = self
         for rect in rects {
-            result = result.drawBoundingRect(rect: rect)
+            result = result.drawBoundingRect(rect: rect, color: color)
         }
         return result
     }

@@ -31,13 +31,14 @@ struct AWSRekognitionUtils {
         compareRequest.similarityThreshold = AWSRekognitionUtils.similarityThreshold
     }
     
-    func compareFaces(onCompletion: @escaping ([CGRect])->Void) {
+    func compareFaces(onCompletion: @escaping ([CGRect], [CGRect])->Void) {
         rekognitionObject.compareFaces(compareRequest, completionHandler: { response, error in
             guard let faceResponse = response, error == nil else {
                 return
             }
             let matchingRects = self.findMatchingFaceRects(faceResponse: faceResponse, in: self.targetImage)
-            onCompletion(matchingRects)
+            let unmatchingRects = self.findUnMatchingFaceRects(faceResponse: faceResponse, in: self.targetImage)
+            onCompletion(matchingRects, unmatchingRects)
         })
     }
     
@@ -50,6 +51,18 @@ struct AWSRekognitionUtils {
         
         return matchedFaces.map { face in
             return getCGRect(from: face.face?.boundingBox, image: image) ?? CGRect.zero
+        }
+    }
+    
+    fileprivate func findUnMatchingFaceRects(faceResponse: AWSRekognitionCompareFacesResponse, in image: UIImage) -> [CGRect] {
+        var unMatchedFaces: [AWSRekognitionComparedFace]  = []
+        
+        if let responseMatches = faceResponse.unmatchedFaces {
+            unMatchedFaces = responseMatches
+        }
+        
+        return unMatchedFaces.map { face in
+            return getCGRect(from: face.boundingBox, image: image) ?? CGRect.zero
         }
     }
     
