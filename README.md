@@ -12,10 +12,12 @@ This project uses cocoapods to manage the dependencies, make sure to run 'pod in
 
 ## How to use
 ### Main view controller
+
+![main view](https://github.com/chenyueuk/AWSRekognitionDemo/blob/master/InstructionResources/main_vc.PNG)
+
 There are 2 areas which displays photo:
 1. Top area displays 'Source photo'.
 2. Middle area is a table view which displays 'Target photos'.
-![main view]()
 
 There are 4 buttons in this view controller:
 1. 'Capture souce' button which presents a camera view controller allow user to take and update 'Source photo'.
@@ -24,6 +26,9 @@ There are 4 buttons in this view controller:
 4. 'Find face matches' button which calls AWS Rekognition service and draw bounding boxes around matching and unmatching faces if there is any.
 
 ### Camera session
+
+![camera view](https://github.com/chenyueuk/AWSRekognitionDemo/blob/master/InstructionResources/camera_vc.PNG)
+
 There are two types of Camera session:
 1. 'Capture souce' which allows user to capture and update 'Source photo'. This session does NOT have result preview.
 2. 'Capture target' which allows user to capture and update 'Target photos'. This session have a result preview collection view, which allows user to see what has been captured in the 'Target photos'.
