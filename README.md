@@ -25,6 +25,10 @@ There are 4 buttons in this view controller:
 3. 'Reset' button which clears all user 'Source photo' and 'Target photos', and load with a 'Test image set'.
 4. 'Find face matches' button which calls AWS Rekognition service and draw bounding boxes around matching and unmatching faces if there is any.
 
+#### Here is an example of finding face matches result:
+
+![main view result](https://github.com/chenyueuk/AWSRekognitionDemo/blob/master/InstructionResources/main_vc_with_results.PNG)
+
 ### Camera session
 
 ![camera view](https://github.com/chenyueuk/AWSRekognitionDemo/blob/master/InstructionResources/camera_vc.PNG)
