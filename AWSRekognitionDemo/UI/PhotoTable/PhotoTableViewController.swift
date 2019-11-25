@@ -82,6 +82,7 @@ class PhotoTableViewController: UIViewController, UITableViewDelegate {
     
     fileprivate func bindResetButton() {
         resetButton.rx.tap.bind { [unowned self] in
+            /// When AWS process count > 0, there are unfinished processes, block deleting data.
             guard self.viewModel.awsRekognitionProcessCount == 0 else {
                 self.present(self.inProgressAlertView(), animated: true, completion: nil)
                 return

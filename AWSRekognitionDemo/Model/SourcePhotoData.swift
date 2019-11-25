@@ -22,6 +22,9 @@ class SourcePhotoData: RekognitionImage {
         self.uuid = uuid
     }
     
+    /**
+    * Set primary key for this object class.
+    */
     override static func primaryKey() -> String? {
         return "uuid"
     }

@@ -42,10 +42,11 @@ class PhotoTableViewModel {
             awsUtil.compareFaces(onCompletion: { (matchingRects, unmatchingRects)  in
                 self.awsRekognitionProcessCount -= 1
                 DispatchQueue.main.async {
+                    /// For matched faces, draw yellow rect, for unmatched faces, draw red rect
                     var resultImage = targetImage
                     resultImage = resultImage.drawRects(rects: matchingRects, color: .yellow)
                     resultImage = resultImage.drawRects(rects: unmatchingRects, color: .red)
-                    
+                    /// Update realm object with result image
                     try? Realm.defaultRealmInstance().write {
                         let newImage = RekognitionImage()
                         newImage.setImage(image: resultImage)

@@ -63,6 +63,9 @@ class CameraSessionViewController: UIViewController, UICollectionViewDelegate {
         }.disposed(by: disposeBag)
     }
     
+    /**
+    * Bind done camera button event, which dismisses camera view controller
+    */
     fileprivate func bindDoneButton() {
         doneButton.rx.tap.bind { [unowned self] in
             self.dismiss(animated: true, completion: nil)
@@ -82,6 +85,9 @@ class CameraSessionViewController: UIViewController, UICollectionViewDelegate {
         }.disposed(by: disposeBag)
     }
     
+    /**
+    * Bind flip camera button event
+    */
     fileprivate func bindFlipCameraButton() {
         flipCameraButton.rx.tap.bind { [unowned self] in
             self.captureSession.stopRunning()

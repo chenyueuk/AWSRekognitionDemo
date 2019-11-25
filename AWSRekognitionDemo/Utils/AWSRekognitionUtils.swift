@@ -21,6 +21,12 @@ struct AWSRekognitionUtils {
     let requestSourceImage = AWSRekognitionImage()
     let requestTargetImage = AWSRekognitionImage()
     
+    /**
+    * Init Rekognition service.
+    *
+    * @param sourceImage where matching faces should be detected with
+    * @param targetImage where matching faces should be detected from
+    */
     init(sourceImage: UIImage, targetImage: UIImage) {
         self.sourceImage = sourceImage
         self.targetImage = targetImage
@@ -31,6 +37,11 @@ struct AWSRekognitionUtils {
         compareRequest.similarityThreshold = AWSRekognitionUtils.similarityThreshold
     }
     
+    /**
+    * Compares the SourceImage and TargetImage with AWSRekognition.
+    *
+    * @param onCompletion handler with bounding boxes of matched faces and unmatched faces
+    */
     func compareFaces(onCompletion: @escaping ([CGRect], [CGRect])->Void) {
         rekognitionObject.compareFaces(compareRequest, completionHandler: { response, error in
             guard let faceResponse = response, error == nil else {

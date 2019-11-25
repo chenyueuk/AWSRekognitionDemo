@@ -33,6 +33,9 @@ extension Realm {
         return try! Realm()
     }
     
+    /**
+    * Returns the Realm object of source photo, it should be unique (with UUID of device)
+    */
     static func sourcePhotoData() -> SourcePhotoData {
         if let sourcePhoto = defaultRealmInstance().object(ofType: SourcePhotoData.self,
                                                            forPrimaryKey: sourcePhotoUUID) {
@@ -45,6 +48,9 @@ extension Realm {
         return newSourcePhoto
     }
     
+    /**
+    * Updates the Realm object of source photo, it should be unique (with UUID of device)
+    */
     static func updateSourcePhotoImage(image: UIImage) {
         DispatchQueue.main.async {
             try? defaultRealmInstance().write {
@@ -53,6 +59,9 @@ extension Realm {
         }
     }
     
+    /**
+    * Create test dataset in Realm DB
+    */
     static func createSampleData() {
         // create mock
         let image1 = UIImage(named: "TestImage1") ?? UIImage()
